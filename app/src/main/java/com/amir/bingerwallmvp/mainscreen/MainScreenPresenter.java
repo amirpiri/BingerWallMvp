@@ -22,6 +22,7 @@ public class MainScreenPresenter implements MainScreenContract.Presenter {
     Retrofit retrofit;
     MainScreenContract.View mView;
 
+
     @Inject
     public MainScreenPresenter(Retrofit retrofit, MainScreenContract.View mView) {
         this.retrofit = retrofit;

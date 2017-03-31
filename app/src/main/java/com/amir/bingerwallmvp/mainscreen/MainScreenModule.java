@@ -4,6 +4,7 @@ import com.amir.bingerwallmvp.util.CustomScope;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 
 /**
  * Created by amir on 3/19/17.
@@ -23,5 +24,6 @@ public class MainScreenModule {
     MainScreenContract.View providesMainScreenContractView() {
         return mView;
     }
+
 }
 

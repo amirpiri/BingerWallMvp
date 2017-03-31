@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import com.amir.bingerwallmvp.App;
 import com.amir.bingerwallmvp.R;
 import com.amir.bingerwallmvp.data.Image;
 import com.amir.bingerwallmvp.data.Post;
+import com.amir.bingerwallmvp.data.adapter.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +27,12 @@ import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity implements MainScreenContract.View {
 
-    ListView listView;
+    private RecyclerView mRecyclerView;
+    private MyAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
     ArrayList<String> list;
-    ArrayAdapter<String> adapter;
+    ArrayList<String> imageList;
 
     @Inject
     MainScreenPresenter mainPresenter;
@@ -38,8 +44,21 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView = (ListView) findViewById(R.id.my_list);
         list = new ArrayList<>();
+        imageList = new ArrayList<>();
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
 
 
         DaggerMainScreenComponent.builder()
@@ -88,14 +107,18 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     public void showPosts(Post posts) {
         //Loop through the posts and get the title of the post and add it to our list object
         List<Image> images = posts.getImages();
+        mAdapter = new MyAdapter();
 
         for (int i=0; i<images.size(); i++) {
             list.add(images.get(i).getCopyright());
+            mAdapter.add(i, images.get(i).getCopyright()
+                    , "http://www.bing.com" + images.get(i).getUrlbase() + "_640x480.jpg"
+                    , images.get(i).getCopyrightlink()
+                    , null);
         }
 
         //Create the array adapter and set it to list view
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

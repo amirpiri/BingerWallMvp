@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:padding="6dip">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cv"
+        app:cardUseCompatPadding="true"
+        app:elevation="15dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/Bing_photoIW"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:placeholderImage="@drawable/my_drawable"
+                fresco:fadeDuration="1000"
+                fresco:placeholderImageScaleType="fitXY"
+                fresco:progressBarImage="@drawable/loading"
+                fresco:progressBarImageScaleType="centerInside"
+                fresco:progressBarAutoRotateInterval="1000"
+                fresco:roundTopLeft="true"
+                fresco:roundTopRight="true"
+                fresco:roundBottomLeft="true"
+                fresco:roundBottomRight="true"
+                fresco:roundedCornerRadius="5dp"
+                fresco:retryImage="@android:drawable/ic_menu_rotate"
+                fresco:retryImageScaleType="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/person_name"
+                android:textSize="20dp"
+                android:text=""
+                android:layout_below="@+id/Bing_photoIW"
+                android:layout_alignLeft="@+id/Bing_photoIW"
+                android:layout_alignStart="@+id/Bing_photoIW" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="جستجو درباره این تصویر در Bing"
+                android:id="@+id/BingSearchBtn"
+                android:layout_below="@+id/person_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout> 
