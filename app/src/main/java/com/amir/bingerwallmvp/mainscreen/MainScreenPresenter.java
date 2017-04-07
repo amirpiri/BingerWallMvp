@@ -1,7 +1,9 @@
 package com.amir.bingerwallmvp.mainscreen;
 
 import com.amir.bingerwallmvp.data.Post;
+import com.amir.bingerwallmvp.util.service;
 
+import java.security.Provider;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,7 +34,7 @@ public class MainScreenPresenter implements MainScreenContract.Presenter {
 
     @Override
     public void loadPost() {
-        retrofit.create(PostService.class).getPostList().subscribeOn(Schedulers.io())
+        retrofit.create(service.class).getPostList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
                 .subscribe(new Observer<Post>() {
@@ -53,8 +55,4 @@ public class MainScreenPresenter implements MainScreenContract.Presenter {
                 });
     }
 
-    private interface PostService {
-        @GET("/HPImageArchive.aspx?format=js&idx=0&n=18&mkt=en-US")
-        Observable<Post> getPostList();
-    }
 }
